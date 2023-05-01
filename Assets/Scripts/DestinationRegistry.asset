@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851e8e3ac6e8ee078a360b4fbfd0cbc4, type: 3}
+  m_Name: DestinationRegistry
+  m_EditorClassIdentifier: 
+  systems:
+  - name: Mercurian System
+    locations:
+    - Mercury
+    - Hermes Station
+  - name: Venerean System
+    locations:
+    - Venus
+  - name: Terrestrial System
+    locations:
+    - Terra
+    - Luna
+  - name: Martian System
+    locations:
+    - Mars
+    - Phobos
+    - Deimos
+    - Ares Battlestation
+  - name: Asteroid Belt
+    locations:
+    - Ceres
+    - Vesta
+    - Pallas
+    - Hygiea
+    - Asteroid Outpost
+    - Mining Colony
+  - name: Jovian System
+    locations:
+    - Ganymede
+    - Io
+    - Europa
+    - Callisto
+    - Tyfonas Station
+    - Hex Station
+  - name: Kronian System
+    locations:
+    - Titan
+    - Mimas
+    - Hypereon
+    - Phoebe
+    - Kyklos Station
+  - name: Neptunian System
+    locations:
+    - Triton
+    - Proteus
+    - Neptune Outpost
+  - name: Uranian System
+    locations:
+    - Titania
+    - Miranda
+    - Umbriel
+    - Ariel
+    - Oberon
+    - Proktos Station
+  - name: Kuiper Belt
+    locations:
+    - Pluto
+    - Eris
+    - Haumea
+    - Makemake
+    - Moniris Station
+    - Kuiper Outpost

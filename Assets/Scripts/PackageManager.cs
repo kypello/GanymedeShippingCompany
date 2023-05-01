@@ -12,8 +12,10 @@ public class PackageManager : MonoBehaviour
     public Vector3 packageRest;
     public Vector3 packageExit;
 
-    public Document stamp;
-    public Document address;
+    public DestinationRegistry destinationRegistry;
+
+    public Document[] stampPrefabs;
+    public Document addressDocumentPrefab;
 
     public Rule[] passiveRules;
 
@@ -42,18 +44,34 @@ public class PackageManager : MonoBehaviour
 
     void SetUpPackage() {
         package.Clear();
-        package.PlaceDocument(Instantiate(address));
-        package.PlaceDocument(Instantiate(stamp));
+        Document addressDocument = Instantiate(addressDocumentPrefab);
+        package.PlaceDocument(addressDocument);
 
-        if (Random.Range(0, 2) == 0) {
+        int systemIndex = Random.Range(0, destinationRegistry.systems.Length);
+        addressDocument.SetData("system", destinationRegistry.systems[systemIndex].name);
+        addressDocument.SetData("location", destinationRegistry.systems[systemIndex].locations[Random.Range(0, destinationRegistry.systems[systemIndex].locations.Length)]);
+        addressDocument.SetData("weight", "" + Random.Range(5, 40));
+        addressDocument.SetData("actual weight", addressDocument.GetData("weight"));
+        addressDocument.SetData("id", "" + Random.Range(100000, 999999));
+
+        foreach (Document stampPrefab in stampPrefabs) {
+            if (stampPrefab.GetData("system") == addressDocument.GetData("system")) {
+                package.PlaceDocument(Instantiate(stampPrefab));
+                break;
+            }
+        }
+
+        if (Random.Range(1, 2) == -1) {
             passiveRules[Random.Range(0, passiveRules.Length)].Break(package);
         }
+
+        addressDocument.UpdateText();
     }
 
     public IEnumerator Ship() {
         uiManager.EnterPackageMoveCutsceneState();
 
-        bool denied = package.Find(Document.Type.Denied) != null;
+        bool denied = package.Find(Document.Type.Result).GetData("approved") == "no";
 
         float t = 0f;
         while (t < 1f) {
@@ -83,12 +101,12 @@ public class PackageManager : MonoBehaviour
             }
         }
 
-        if (package.Find(Document.Type.Denied) != null && brokenRules.Count == 0) {
+        if (package.Find(Document.Type.Result).GetData("approved") == "no" && brokenRules.Count == 0) {
             error = true;
             errorText = "-Package denied for no reason";
         }
 
-        if (package.Find(Document.Type.Approved) != null && brokenRules.Count > 0) {
+        if (package.Find(Document.Type.Result).GetData("approved") == "yes" && brokenRules.Count > 0) {
             error = true;
             foreach (Rule brokenRule in brokenRules) {
                 errorText += "-" + brokenRule.errorText + "\n";

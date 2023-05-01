@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba58a2b3f2c9a3d67aab4acf3f05a945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataFields:
+  - key: approved
+    value: yes
   width: 2
   height: 1
   bottomLeftPosition: {x: 0, y: 0}
@@ -61,8 +64,7 @@ MonoBehaviour:
   - {fileID: 7644655649611218444}
   texts:
   - {fileID: 6624422526468946593}
-  documentClass: 1
-  type: 2
+  type: 3
 --- !u!1 &1187198739997748893
 GameObject:
   m_ObjectHideFlags: 0

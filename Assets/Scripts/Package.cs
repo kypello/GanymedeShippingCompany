@@ -16,29 +16,15 @@ public class Package : MonoBehaviour
     List<Document> documents = new List<Document>();
     public ShipButton shipButton;
 
-    public List<Document> defaultDocumentPrefabs = new List<Document>();
-
     Tile[,] tiles = new Tile[6,6];
 
     void Awake() {
         tiles = new Tile[width, height];
     }
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            GeneratePackage();
-        }
-    }
-
     public void Clear() {
         for (int i = documents.Count - 1; i >= 0; i--) {
             RemoveDocument(documents[i], true);
-        }
-    }
-
-    public void GeneratePackage() {
-        foreach (Document documentPrefab in defaultDocumentPrefabs) {
-            PlaceDocument(Instantiate(documentPrefab));
         }
     }
 
@@ -53,7 +39,7 @@ public class Package : MonoBehaviour
 
     public bool ResultStampPresent() {
         foreach (Document document in documents) {
-            if (document.documentClass == Document.DocumentClass.ResultStamp) {
+            if (document.type == Document.Type.Result) {
                 return true;
             }
         }
@@ -120,9 +106,9 @@ public class Package : MonoBehaviour
     }
 
     public void PlaceDocument(Document document, Vector2Int bottomLeftPosition) {
-        if (document.documentClass != Document.DocumentClass.Free) {
+        if (document.type != Document.Type.Free) {
             for (int i = documents.Count - 1; i >= 0; i--) {
-                if (documents[i].documentClass == document.documentClass) {
+                if (documents[i].type == document.type) {
                     RemoveDocument(documents[i], true);
                 }
             }

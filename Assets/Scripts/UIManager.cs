@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     public void EnterSelectDocumentState() {
         palette.Show();
         shipButton.clickable = package.ResultStampPresent();
-        if (package.Find(Document.Type.Denied) != null) {
+        if (package.Find(Document.Type.Result) != null && package.Find(Document.Type.Result).GetData("approved") == "no") {
             shipButtonText.text = "<<< Next";
         }
         else {

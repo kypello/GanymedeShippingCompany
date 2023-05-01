@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320782297081874235}
-  m_LocalRotation: {x: 0, y: 0, z: 0.039462302, w: 0.9992211}
-  m_LocalPosition: {x: 3, y: 5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45,9 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba58a2b3f2c9a3d67aab4acf3f05a945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataFields:
+  - key: system
+    value: Jovian System
   width: 1
   height: 1
-  bottomLeftPosition: {x: 4, y: 5}
+  bottomLeftPosition: {x: 0, y: 0}
   deleteAllowed: 0
   images:
   - {fileID: 2695916384218789648}
@@ -62,7 +65,7 @@ MonoBehaviour:
   - {fileID: 2349729021787481076}
   - {fileID: 2455296830609174577}
   texts: []
-  documentClass: 0
+  type: 1
 --- !u!1 &1187198739997748893
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +897,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -80, y: -80}
+  m_SizeDelta: {x: -90, y: -90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8637166965440218737
 CanvasRenderer:

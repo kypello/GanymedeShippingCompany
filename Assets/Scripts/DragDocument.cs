@@ -21,6 +21,8 @@ public class DragDocument : MonoBehaviour
     public Palette palette;
     public RectTransform noSymbol;
 
+    public DropdownMenu dropdownMenu;
+
     public Transform documentPlacePlane;
 
     public bool draggingDocument = false;
@@ -35,22 +37,31 @@ public class DragDocument : MonoBehaviour
             
             Vector2Int highlightedTile = package.WorldToTileSpace(hit.point);
 
-            if (package.TileIsWithinBounds(highlightedTile) && package.TileIsOccupied(highlightedTile)) {
+            if (package.TileIsWithinBounds(highlightedTile) && package.TileIsOccupied(highlightedTile) && !dropdownMenu.IsActive()) {
                 Document highlightedDocument = package.GetDocumentAtTile(highlightedTile);
 
-                placePreview.gameObject.SetActive(true);
+                if (highlightedDocument.CheckHighlightableSegments() != null) {
+                    placePreview.gameObject.SetActive(false);
 
-                placePreview.transform.position = package.DocumentCornerToCenter(package.TileToWorldSpace(highlightedDocument.bottomLeftPosition), highlightedDocument) + Vector3.forward * documentPlacePlane.position.z;
-                placePreview.transform.rotation = highlightedDocument.transform.rotation;
-                placePreviewCanvas.sizeDelta = new Vector2(highlightedDocument.width * 200, highlightedDocument.height * 200);
+                    if (Input.GetMouseButtonDown(0)) {
+                        highlightedDocument.CheckHighlightableSegments().GetClicked();
+                    }
+                }
+                else {
+                    placePreview.gameObject.SetActive(true);
 
-                if (Input.GetMouseButtonDown(0)) {
-                    documentBeingDragged = highlightedDocument;
-                    documentBeingDragged.transform.rotation = Quaternion.identity;
-                    draggingDocument = true;
-                    package.RemoveDocument(highlightedDocument, false);
-                    clickedThisFrame = true;
-                    uiManager.EnterDraggingDocumentState();
+                    placePreview.transform.position = package.DocumentCornerToCenter(package.TileToWorldSpace(highlightedDocument.bottomLeftPosition), highlightedDocument) + Vector3.forward * documentPlacePlane.position.z;
+                    placePreview.transform.rotation = highlightedDocument.transform.rotation;
+                    placePreviewCanvas.sizeDelta = new Vector2(highlightedDocument.width * 200, highlightedDocument.height * 200);
+
+                    if (Input.GetMouseButtonDown(0)) {
+                        documentBeingDragged = highlightedDocument;
+                        documentBeingDragged.transform.rotation = Quaternion.identity;
+                        draggingDocument = true;
+                        package.RemoveDocument(highlightedDocument, false);
+                        clickedThisFrame = true;
+                        uiManager.EnterDraggingDocumentState();
+                    }
                 }
             }
             else {
@@ -68,7 +79,7 @@ public class DragDocument : MonoBehaviour
             Vector2Int documentCornerTile = package.WorldToTileSpace(package.DocumentCenterToCorner(documentCenterPosition, documentBeingDragged));
 
             if (package.DocumentPositionIsValid(documentBeingDragged, documentCornerTile)) {
-                documentBeingDragged.SetOpaque();
+                documentBeingDragged.SetTransparentState(Document.TransparentState.SemiTransparent);
                 noSymbol.gameObject.SetActive(false);
                 placePreview.gameObject.SetActive(true);
                 placePreview.position = documentCenterPosition;
@@ -76,6 +87,7 @@ public class DragDocument : MonoBehaviour
                 placePreviewCanvas.sizeDelta = new Vector2(documentBeingDragged.width * 200, documentBeingDragged.height * 200);
 
                 if (Input.GetMouseButtonDown(0) && !clickedThisFrame) {
+                    documentBeingDragged.SetTransparentState(Document.TransparentState.Opaque);
                     package.PlaceDocument(documentBeingDragged, documentCornerTile);
                     placePreview.gameObject.SetActive(false);
                     draggingDocument = false;
@@ -89,7 +101,7 @@ public class DragDocument : MonoBehaviour
                 }
             }
             else {
-                documentBeingDragged.SetTransparent();
+                documentBeingDragged.SetTransparentState(Document.TransparentState.Transparent);
                 placePreview.gameObject.SetActive(false);
 
                 if (!documentBeingDragged.deleteAllowed) {
