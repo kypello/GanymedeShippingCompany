@@ -40,7 +40,6 @@ MonoBehaviour:
     - Mining Colony
   - name: Jovian System
     locations:
-    - Ganymede
     - Io
     - Europa
     - Callisto

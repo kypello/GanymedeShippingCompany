@@ -14,7 +14,7 @@ public class DropdownMenu : MonoBehaviour
     const float canvasHeight = 1440f;
 
     const float rightBound = 2200f;
-    const float leftBound = 24f;
+    const float leftBound = 360f;
     const float bottomBound = 24f;
 
     RectTransform rectTransform;

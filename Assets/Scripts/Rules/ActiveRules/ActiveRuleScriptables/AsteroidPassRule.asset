@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 387c85c3980ab52d682626b0e8d01fa3, type: 3}
-  m_Name: StampRule
+  m_Script: {fileID: 11500000, guid: 2495235e1985808dcbd1a8bb85e1597b, type: 3}
+  m_Name: AsteroidPassRule
   m_EditorClassIdentifier: 
   appearsInRulebook: 0
-  RulebookEntry: 
-  FailText: 
+  rulebookEntry: 
+  errorText: 
+  destinationRegistry: {fileID: 11400000, guid: a7afaf0ccf4e39c7fbdab62c4e848361, type: 2}
+  dependentRules:
+  - {fileID: 11400000, guid: d329c1dd0c9ba3ded83b6489733b666d, type: 2}

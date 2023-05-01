@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c579f0f2b1f4cc602a7c7cdbe4462a59, type: 3}
+  m_Name: VisaRule
+  m_EditorClassIdentifier: 
+  appearsInRulebook: 0
+  rulebookEntry: 
+  errorText: 
+  destinationRegistry: {fileID: 0}
+  dependentRules:
+  - {fileID: 11400000, guid: cab90834d24951b1db67b26aee5c264a, type: 2}
+  - {fileID: 11400000, guid: 2a9320d89cfe2f928a5209a977cb79b7, type: 2}

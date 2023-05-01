@@ -22,7 +22,7 @@ public class TextInputHighlightableSegment : HighlightableSegment
     }
 
     public void Confirm() {
-        if (System.Int32.Parse(text) > max) {
+        if (int.Parse(text) > max) {
             text = "" + max;
         }
 

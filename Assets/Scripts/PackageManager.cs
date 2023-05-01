@@ -15,13 +15,23 @@ public class PackageManager : MonoBehaviour
     public DestinationRegistry destinationRegistry;
 
     public Document[] stampPrefabs;
+    public Document dummyStampPrefab;
     public Document addressDocumentPrefab;
 
     public Rule[] passiveRules;
+    public Rule[] activeRules;
+
+    public Rule testRule;
+    bool testedRule = false;
 
     public Button errorContinueButton;
     public GameObject errorMessage;
     public TMP_Text errorMessageText;
+
+    public TMP_Text weightDisplay;
+
+    public enum LegalDestinations {Jovian, GasGiants, All}
+    public LegalDestinations legalDestinations = LegalDestinations.Jovian;
 
     void Start() {
         StartCoroutine(Receive());
@@ -39,31 +49,70 @@ public class PackageManager : MonoBehaviour
             yield return null;
         }
 
+        if (package.Find(Document.Type.Address) != null) {
+            weightDisplay.text = "<b>Weight:</b> " + package.Find(Document.Type.Address).GetData("actual weight") + "kg";
+        }
+        else {
+            weightDisplay.text = "<b>Weight:</b> " + Random.Range(5, 40) + "kg";
+        }
+
         uiManager.EnterSelectDocumentState();
     }
 
     void SetUpPackage() {
         package.Clear();
+
         Document addressDocument = Instantiate(addressDocumentPrefab);
         package.PlaceDocument(addressDocument);
 
-        int systemIndex = Random.Range(0, destinationRegistry.systems.Length);
+        Document dummyStamp = Instantiate(dummyStampPrefab);
+        package.PlaceDocument(dummyStamp);
+
+        int systemIndex = 0;
+        switch (legalDestinations) {
+            case LegalDestinations.Jovian:
+                systemIndex = 5;
+                break;
+            case LegalDestinations.GasGiants:
+                systemIndex = Random.Range(5, 10);
+                break;
+            case LegalDestinations.All:
+                systemIndex = Random.Range(0, 10);
+                break;
+        }
+
         addressDocument.SetData("system", destinationRegistry.systems[systemIndex].name);
+        dummyStamp.SetData("system", destinationRegistry.systems[systemIndex].name);
         addressDocument.SetData("location", destinationRegistry.systems[systemIndex].locations[Random.Range(0, destinationRegistry.systems[systemIndex].locations.Length)]);
         addressDocument.SetData("weight", "" + Random.Range(5, 40));
         addressDocument.SetData("actual weight", addressDocument.GetData("weight"));
         addressDocument.SetData("id", "" + Random.Range(100000, 999999));
 
-        foreach (Document stampPrefab in stampPrefabs) {
-            if (stampPrefab.GetData("system") == addressDocument.GetData("system")) {
-                package.PlaceDocument(Instantiate(stampPrefab));
-                break;
-            }
+        
+        if (!testedRule) {
+            testRule.Test(package);
+            testedRule = false;
+        }
+        else if (false) {
+            //passiveRules[Random.Range(0, passiveRules.Length)].Break(package);
+            passiveRules[0].Break(package);
         }
 
-        if (Random.Range(1, 2) == -1) {
-            passiveRules[Random.Range(0, passiveRules.Length)].Break(package);
+        if (package.Find(Document.Type.Stamp) != null) {
+            string stampSystem = dummyStamp.GetData("system");
+            package.RemoveDocument(dummyStamp, true);
+            Document realStamp = null;
+
+            foreach (Document stampPrefab in stampPrefabs) {
+                if (stampPrefab.GetData("system") == stampSystem) {
+                    realStamp = Instantiate(stampPrefab);
+                    break;
+                }
+            }
+
+            package.PlaceDocument(realStamp);
         }
+        
 
         addressDocument.UpdateText();
     }
@@ -72,6 +121,8 @@ public class PackageManager : MonoBehaviour
         uiManager.EnterPackageMoveCutsceneState();
 
         bool denied = package.Find(Document.Type.Result).GetData("approved") == "no";
+
+        weightDisplay.text = "<b>Weight:</b> 0kg";
 
         float t = 0f;
         while (t < 1f) {
@@ -98,6 +149,7 @@ public class PackageManager : MonoBehaviour
         foreach (Rule rule in passiveRules) {
             if (!rule.Verify(package)) {
                 brokenRules.Add(rule);
+                break;
             }
         }
 
@@ -110,6 +162,21 @@ public class PackageManager : MonoBehaviour
             error = true;
             foreach (Rule brokenRule in brokenRules) {
                 errorText += "-" + brokenRule.errorText + "\n";
+            }
+        }
+
+        if (package.Find(Document.Type.Result).GetData("approved") == "yes" && brokenRules.Count == 0) {
+            foreach (Rule rule in activeRules) {
+                if (!rule.Verify(package)) {
+                    brokenRules.Add(rule);
+                }
+            }
+
+            if (brokenRules.Count > 0) {
+                error = true;
+                foreach (Rule brokenRule in brokenRules) {
+                    errorText += "-" + brokenRule.errorText + "\n";
+                }
             }
         }
 

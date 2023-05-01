@@ -42,6 +42,7 @@ public class DragDocument : MonoBehaviour
                     placePreview.gameObject.SetActive(false);
 
                     if (Input.GetMouseButtonDown(0)) {
+                        Debug.Log("Click");
                         highlightedDocument.CheckHighlightableSegments().GetClicked();
                     }
                 }

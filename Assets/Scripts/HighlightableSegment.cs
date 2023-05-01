@@ -17,10 +17,6 @@ public abstract class HighlightableSegment : MonoBehaviour, IPointerEnterHandler
     void Update() {
         if (highlightActive) {
             textBox.text = "<mark=#FFFFFF50>" + text;
-
-            if (Input.GetMouseButtonDown(0)) {
-                GetClicked();
-            }
         }
         else {
             textBox.text = text;
