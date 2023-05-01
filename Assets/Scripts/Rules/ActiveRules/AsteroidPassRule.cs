@@ -33,4 +33,11 @@ public class AsteroidPassRule : Rule
             }
         }
     }
+
+    public override void Test(Package package) {
+        int systemIndex = Random.Range(0, 5);
+        package.Find(Document.Type.Address).SetData("system", destinationRegistry.systems[systemIndex].name);
+        package.Find(Document.Type.Address).SetData("location", destinationRegistry.systems[systemIndex].locations[Random.Range(0, destinationRegistry.systems[systemIndex].locations.Length)]);
+        package.Find(Document.Type.Stamp).SetData("system", destinationRegistry.systems[systemIndex].name);
+    }
 }

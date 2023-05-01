@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e83dd004bf1d4601a9695a16f69ac3a, type: 3}
   m_Name: AsteroidPassDateRule
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
+  appearsInRulebook: 1
+  rulebookEntry: Travel to the Asteroid Belt takes three days, so the date on the
+    Asteroid Pass must be three days ahead
   errorText: Incorrect date of arrival in Asteroid Belt
   destinationRegistry: {fileID: 0}

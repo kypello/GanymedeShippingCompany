@@ -12,6 +12,9 @@ public class AsteroidPassDateRule : Rule
 
         errorText = "Incorrect date of arrival in Asteroid Belt";
 
-        return int.Parse(package.Find(Document.Type.AsteroidPass).GetData("date")) == DateAuthority.date + 3;
+        int dateField;
+        bool fieldIsInt = int.TryParse(package.Find(Document.Type.AsteroidPass).GetData("date"), out dateField);
+
+        return fieldIsInt && dateField == DateAuthority.date + 3;
     }
 }

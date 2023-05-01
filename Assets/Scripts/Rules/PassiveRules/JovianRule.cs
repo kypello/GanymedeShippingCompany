@@ -19,4 +19,8 @@ public class JovianRule : Rule
         package.Find(Document.Type.Address).SetData("location", destinationRegistry.systems[systemIndex].locations[Random.Range(0, destinationRegistry.systems[systemIndex].locations.Length)]);
         package.Find(Document.Type.Stamp).SetData("system", destinationRegistry.systems[systemIndex].name);
     }
+
+    public override void Test(Package package) {
+        Break(package);
+    }
 }

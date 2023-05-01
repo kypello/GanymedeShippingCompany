@@ -26,6 +26,11 @@ public class DragDocument : MonoBehaviour
     public bool draggingDocument = false;
     public bool clickedThisFrame = false;
 
+    public AudioSource buttonSound;
+    public AudioSource documentPickupSound;
+    public AudioSource documentPlaceSound;
+    public AudioSource documentDeleteSound;
+
     void Update() {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -44,6 +49,7 @@ public class DragDocument : MonoBehaviour
                     if (Input.GetMouseButtonDown(0)) {
                         Debug.Log("Click");
                         highlightedDocument.CheckHighlightableSegments().GetClicked();
+                        buttonSound.Play();
                     }
                 }
                 else {
@@ -54,6 +60,7 @@ public class DragDocument : MonoBehaviour
                     placePreviewCanvas.sizeDelta = new Vector2(highlightedDocument.width * 200, highlightedDocument.height * 200);
 
                     if (Input.GetMouseButtonDown(0) && !clickedThisFrame) {
+                        documentPickupSound.Play();
                         documentBeingDragged = highlightedDocument;
                         documentBeingDragged.transform.rotation = Quaternion.identity;
                         draggingDocument = true;
@@ -86,6 +93,7 @@ public class DragDocument : MonoBehaviour
                 placePreviewCanvas.sizeDelta = new Vector2(documentBeingDragged.width * 200, documentBeingDragged.height * 200);
 
                 if (Input.GetMouseButtonDown(0) && !clickedThisFrame) {
+                    documentPlaceSound.Play();
                     documentBeingDragged.SetTransparentState(Document.TransparentState.Opaque);
                     package.PlaceDocument(documentBeingDragged, documentCornerTile);
                     placePreview.gameObject.SetActive(false);
@@ -93,6 +101,7 @@ public class DragDocument : MonoBehaviour
                     uiManager.EnterSelectDocumentState();
                 }
                 else if (Input.GetMouseButtonDown(1) && documentBeingDragged.deleteAllowed) {
+                    documentDeleteSound.Play();
                     placePreview.gameObject.SetActive(false);
                     draggingDocument = false;
                     Destroy(documentBeingDragged.gameObject);
@@ -109,6 +118,7 @@ public class DragDocument : MonoBehaviour
                 }
 
                 if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && !clickedThisFrame && documentBeingDragged.deleteAllowed) {
+                    documentDeleteSound.Play();
                     draggingDocument = false;
                     Destroy(documentBeingDragged.gameObject);
                     noSymbol.gameObject.SetActive(false);

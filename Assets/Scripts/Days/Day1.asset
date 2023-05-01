@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455daf8645977babb8cac22c0e5247a8, type: 3}
+  m_Name: Day1
+  m_EditorClassIdentifier: 
+  legalDestinations: 0
+  passiveRules:
+  - {fileID: 11400000, guid: ca6ef548ab5de35db953381da1ec3d20, type: 2}
+  - {fileID: 11400000, guid: b8bade7d9e459e6c7a249b1ed42964a2, type: 2}
+  - {fileID: 11400000, guid: 83303400f82b59e67989b63aa85cfb02, type: 2}
+  - {fileID: 11400000, guid: 2471083d2df2d4e9da245200dedb4a9e, type: 2}
+  - {fileID: 11400000, guid: d95011d3e094f04149b4d3f691e0c7c7, type: 2}
+  activeRules: []
+  availableDocuments: 2
+  storyText: HOWDY!!! Welcome to your first day at Ganymede Shipping Company! Your
+    job is to inspect outgoing packages, and either approve or deny them by giving
+    them a green or red sticker. Currently we only ship within the Jovian system,
+    so deny any packages that go to other systems. Good luck!
+  testRule: {fileID: 11400000, guid: d95011d3e094f04149b4d3f691e0c7c7, type: 2}
+  testRulePackageNum: 1
+  doRuleTest: 1

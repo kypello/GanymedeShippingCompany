@@ -17,6 +17,8 @@ public class ShipButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public bool clickable;
     public bool mouseOver;
 
+    public AudioSource buttonSound;
+
     void Update() {
         if (clickable) {
             buttonGraphic.SetActive(true);
@@ -24,6 +26,7 @@ public class ShipButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 text.color = highlightColor;
 
                 if (Input.GetMouseButtonDown(0)) {
+                    buttonSound.Play();
                     packageManager.StartCoroutine(packageManager.Ship());
                 }
             }

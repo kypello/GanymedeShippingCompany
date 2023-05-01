@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PackageManager : MonoBehaviour
@@ -18,10 +19,10 @@ public class PackageManager : MonoBehaviour
     public Document dummyStampPrefab;
     public Document addressDocumentPrefab;
 
-    public Rule[] passiveRules;
-    public Rule[] activeRules;
-
-    public Rule testRule;
+    public Day endlessDay;
+    public Day[] storyDays;
+    public Day currentDay;
+    
     bool testedRule = false;
 
     public Button errorContinueButton;
@@ -29,11 +30,71 @@ public class PackageManager : MonoBehaviour
     public TMP_Text errorMessageText;
 
     public TMP_Text weightDisplay;
+    public TMP_Text dateDisplay;
 
-    public enum LegalDestinations {Jovian, GasGiants, All}
-    public LegalDestinations legalDestinations = LegalDestinations.Jovian;
+    public TMP_Text rulebook;
+
+    int packagesSent = 0;
+
+    public Palette palette;
+    public Timer timer;
+
+    public bool dayStarted = false;
+    public RulebookPopup rulebookPopup;
+
+    public Animation fadeAnim;
+    public TMP_Text dayText;
+    public Animation dayTextAnim;
+    public AudioSource music;
+
+    public AudioSource buttonSound;
+    public AudioSource correctSound;
+    public AudioSource incorrectSound;
+    public Animation camShake;
+    public AudioSource conveyorSound;
+
+    public Material conveyor;
+
+    public static bool endless = false;
 
     void Start() {
+        if (endless) {
+            currentDay = endlessDay;
+        }
+        else {
+            currentDay = storyDays[DateAuthority.date - 1];
+        }
+        dateDisplay.text = DateAuthority.date + " May 2164 UST";
+
+        string rulebookText = "";
+
+        if (!endless) {
+            rulebookText += "<b>" + currentDay.storyText + "</b>\n\n"; 
+        }
+
+        foreach (Rule rule in currentDay.passiveRules) {
+            if (rule.appearsInRulebook) {
+                rulebookText += "- " + rule.rulebookEntry + "\n\n";
+            }
+        }
+        foreach (Rule rule in currentDay.activeRules) {
+            if (rule.appearsInRulebook) {
+                rulebookText += "- " + rule.rulebookEntry + "\n\n";
+            }
+        }
+        rulebook.text = rulebookText;
+
+        palette.SetAvailableDocuments(currentDay.availableDocuments);
+
+        rulebookPopup.InitialOpen();
+        uiManager.EnterRulebookState();
+        StartCoroutine(FadeIn());
+    }
+
+    public void StartDay() {
+        dayStarted = true;
+        timer.StartTiming();
+        music.Play();
         StartCoroutine(Receive());
     }
 
@@ -42,12 +103,17 @@ public class PackageManager : MonoBehaviour
 
         SetUpPackage();
 
+        conveyorSound.Play();
+
         float t = 0f;
         while (t < 1f) {
             t += Time.deltaTime * 2f;
             package.transform.position = Vector3.Lerp(packageSpawn, packageRest, t);
+            conveyor.SetTextureOffset("_MainTex", Vector2.right * Mathf.Lerp(0f, 7f, t));
             yield return null;
         }
+
+        conveyorSound.Stop();
 
         if (package.Find(Document.Type.Address) != null) {
             weightDisplay.text = "<b>Weight:</b> " + package.Find(Document.Type.Address).GetData("actual weight") + "kg";
@@ -69,14 +135,14 @@ public class PackageManager : MonoBehaviour
         package.PlaceDocument(dummyStamp);
 
         int systemIndex = 0;
-        switch (legalDestinations) {
-            case LegalDestinations.Jovian:
+        switch (currentDay.legalDestinations) {
+            case Day.LegalDestinations.Jovian:
                 systemIndex = 5;
                 break;
-            case LegalDestinations.GasGiants:
+            case Day.LegalDestinations.GasGiants:
                 systemIndex = Random.Range(5, 10);
                 break;
-            case LegalDestinations.All:
+            case Day.LegalDestinations.All:
                 systemIndex = Random.Range(0, 10);
                 break;
         }
@@ -89,13 +155,13 @@ public class PackageManager : MonoBehaviour
         addressDocument.SetData("id", "" + Random.Range(100000, 999999));
 
         
-        if (!testedRule) {
-            testRule.Test(package);
+        if (currentDay.doRuleTest && packagesSent == currentDay.testRulePackageNum && !testedRule) {
+            currentDay.testRule.Test(package);
             testedRule = false;
         }
-        else if (false) {
+        else if (Random.Range(0, 2) == 0) {
             //passiveRules[Random.Range(0, passiveRules.Length)].Break(package);
-            passiveRules[0].Break(package);
+            currentDay.passiveRules[Random.Range(0, currentDay.passiveRules.Length)].Break(package);
         }
 
         if (package.Find(Document.Type.Stamp) != null) {
@@ -124,20 +190,57 @@ public class PackageManager : MonoBehaviour
 
         weightDisplay.text = "<b>Weight:</b> 0kg";
 
+        conveyorSound.Play();
+
         float t = 0f;
         while (t < 1f) {
             t += Time.deltaTime * 2f;
             if (denied) {
                 package.transform.position = Vector3.Lerp(packageRest, packageSpawn, t);
+                conveyor.SetTextureOffset("_MainTex", Vector2.right * Mathf.Lerp(7f, 0f, t));
             }
             else {
                 package.transform.position = Vector3.Lerp(packageRest, packageExit, t);
+                conveyor.SetTextureOffset("_MainTex", Vector2.right * Mathf.Lerp(0f, 7f, t));
             }
             
             yield return null;
         }
 
-        StartCoroutine(CheckPackage());
+        conveyorSound.Stop();
+
+        yield return CheckPackage();
+
+        if (timer.timing) {
+            StartCoroutine(Receive());
+        }
+        else {
+            DateAuthority.date++;
+            StartCoroutine(FadeOut());
+        }
+    }
+
+    public IEnumerator FadeIn() {
+        fadeAnim.gameObject.SetActive(true);
+        dayText.text = "Day " + DateAuthority.date;
+        dayTextAnim.Play();
+        yield return new WaitForSeconds(2f);
+        fadeAnim.Play("FadeIn");
+        yield return new WaitForSeconds(0.5f);
+        fadeAnim.gameObject.SetActive(false);
+    }
+
+    public IEnumerator FadeOut() {
+        fadeAnim.gameObject.SetActive(true);
+        fadeAnim.Play("FadeOut");
+        yield return new WaitForSeconds(0.5f);
+
+        if (endless || DateAuthority.date <= storyDays.Length) {
+            SceneManager.LoadScene(1);
+        }
+        else {
+            SceneManager.LoadScene(0);
+        }
     }
 
     IEnumerator CheckPackage() {
@@ -146,7 +249,7 @@ public class PackageManager : MonoBehaviour
 
         List<Rule> brokenRules = new List<Rule>();
 
-        foreach (Rule rule in passiveRules) {
+        foreach (Rule rule in currentDay.passiveRules) {
             if (!rule.Verify(package)) {
                 brokenRules.Add(rule);
                 break;
@@ -166,7 +269,7 @@ public class PackageManager : MonoBehaviour
         }
 
         if (package.Find(Document.Type.Result).GetData("approved") == "yes" && brokenRules.Count == 0) {
-            foreach (Rule rule in activeRules) {
+            foreach (Rule rule in currentDay.activeRules) {
                 if (!rule.Verify(package)) {
                     brokenRules.Add(rule);
                 }
@@ -181,6 +284,8 @@ public class PackageManager : MonoBehaviour
         }
 
         if (error) {
+            incorrectSound.Play();
+            camShake.Play();
             errorContinueButton.gameObject.SetActive(true);
             errorContinueButton.mouseOver = false;
             errorMessage.SetActive(true);
@@ -190,10 +295,15 @@ public class PackageManager : MonoBehaviour
                 yield return null;
             }
 
+            buttonSound.Play();
+
             errorContinueButton.gameObject.SetActive(false);
             errorMessage.SetActive(false);
         }
+        else {
+            correctSound.Play();
+        }
 
-        StartCoroutine(Receive());
+        packagesSent++;
     }
 }

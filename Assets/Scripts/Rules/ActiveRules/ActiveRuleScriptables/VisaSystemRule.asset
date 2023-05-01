@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5fa51424e357998af2afc6da716503, type: 3}
   m_Name: VisaSystemRule
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
-  errorText: 
+  appearsInRulebook: 1
+  rulebookEntry: Destination on visa must match destination listed on Destination
+    Sticker
+  errorText: Visa destination system doesn't match
   destinationRegistry: {fileID: 0}
-  dependentRules: []

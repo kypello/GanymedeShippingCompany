@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce2102782403d3ca8de4cd14ed3eb68, type: 3}
   m_Name: StampRule
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
-  errorText: 
+  appearsInRulebook: 1
+  rulebookEntry: All packages must have a stamp that matches the destination system
+    (check planets list)
+  errorText: Missing stamp
   destinationRegistry: {fileID: 0}

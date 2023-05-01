@@ -14,6 +14,8 @@ public class TextInputMonitor : MonoBehaviour
     int cursor;
     TextInputHighlightableSegment segment;
 
+    public AudioSource confirmSound;
+
     bool cursorVisible = false;
 
     bool number = false;
@@ -95,6 +97,8 @@ public class TextInputMonitor : MonoBehaviour
                         text = text.Remove(i, 1);
                     }
                 }
+
+                confirmSound.Play();
 
                 if (text == "" || text == "-") {
                     text = "0";

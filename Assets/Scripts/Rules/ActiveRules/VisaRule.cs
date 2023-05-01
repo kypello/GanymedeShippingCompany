@@ -19,4 +19,11 @@ public class VisaRule : Rule
         errorText = "Missing interplanetary visa";
         return false;
     }
+
+    public override void Test(Package package) {
+        int systemIndex = Random.Range(6, 10);
+        package.Find(Document.Type.Address).SetData("system", destinationRegistry.systems[systemIndex].name);
+        package.Find(Document.Type.Address).SetData("location", destinationRegistry.systems[systemIndex].locations[Random.Range(0, destinationRegistry.systems[systemIndex].locations.Length)]);
+        package.Find(Document.Type.Stamp).SetData("system", destinationRegistry.systems[systemIndex].name);
+    }
 }

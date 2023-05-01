@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455daf8645977babb8cac22c0e5247a8, type: 3}
+  m_Name: Day3
+  m_EditorClassIdentifier: 
+  legalDestinations: 2
+  passiveRules:
+  - {fileID: 11400000, guid: ca6ef548ab5de35db953381da1ec3d20, type: 2}
+  - {fileID: 11400000, guid: b8bade7d9e459e6c7a249b1ed42964a2, type: 2}
+  - {fileID: 11400000, guid: 83303400f82b59e67989b63aa85cfb02, type: 2}
+  - {fileID: 11400000, guid: 2471083d2df2d4e9da245200dedb4a9e, type: 2}
+  activeRules:
+  - {fileID: 11400000, guid: 449c9e805b55cc41498b0fb1b73ed9f3, type: 2}
+  - {fileID: 11400000, guid: cab90834d24951b1db67b26aee5c264a, type: 2}
+  - {fileID: 11400000, guid: 2a9320d89cfe2f928a5209a977cb79b7, type: 2}
+  - {fileID: 11400000, guid: c91f990280f2527d8840d738917b248a, type: 2}
+  - {fileID: 11400000, guid: d329c1dd0c9ba3ded83b6489733b666d, type: 2}
+  availableDocuments: 4
+  storyText: Negotiations with the Asteroid Bureau were successful! We can now ship
+    through the Asteroid Belt with one of these special Asteroid Passes! This means
+    we can ship to anywhere in the solar system now.
+  testRule: {fileID: 11400000, guid: c91f990280f2527d8840d738917b248a, type: 2}
+  testRulePackageNum: 0
+  doRuleTest: 1

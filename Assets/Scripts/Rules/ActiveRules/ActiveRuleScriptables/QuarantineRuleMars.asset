@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd0bebcf869dbd30bb78faa72a74b75, type: 3}
   m_Name: QuarantineRuleMars
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
-  errorText: 
+  appearsInRulebook: 1
+  rulebookEntry: 'All packages entering the Martian System must be quarantined for
+    a certain amount of time, depending on location as follows:'
+  errorText: Missing quarantine mandate
   destinationRegistry: {fileID: 11400000, guid: a7afaf0ccf4e39c7fbdab62c4e848361, type: 2}
   system: Martian System
   systemIndex: 3

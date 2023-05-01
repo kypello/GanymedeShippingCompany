@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e9064ec8e3bb16e9a00fbb90db0867, type: 3}
   m_Name: GasGiantRule
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
+  appearsInRulebook: 1
+  rulebookEntry: Ship to the Gas Giants and Kuiper Belt only. No shipping through
+    the Asteroid Belt or to the inner planets
   errorText: 
   destinationRegistry: {fileID: 11400000, guid: a7afaf0ccf4e39c7fbdab62c4e848361, type: 2}

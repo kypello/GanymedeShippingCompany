@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c660dfac1947019ce9807c30003e9a09, type: 3}
   m_Name: JovianRule
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
+  appearsInRulebook: 1
+  rulebookEntry: No shipping to locations outside of the Jovian system
   errorText: 
   destinationRegistry: {fileID: 11400000, guid: a7afaf0ccf4e39c7fbdab62c4e848361, type: 2}

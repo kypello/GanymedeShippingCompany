@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e31f1f4b6cc8cd34a4bf188804a5666, type: 3}
   m_Name: WeightMatchRule
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
-  errorText: 
+  appearsInRulebook: 1
+  rulebookEntry: Weight listed on package must match actual weight (show on left
+    side of the screen)
+  errorText: Package weight doesn't match
   destinationRegistry: {fileID: 0}

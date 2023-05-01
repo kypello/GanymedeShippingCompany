@@ -19,6 +19,8 @@ public class DropdownMenu : MonoBehaviour
 
     RectTransform rectTransform;
 
+    public AudioSource confirmSound;
+
     int itemCount;
     public List<TMP_Text> itemSlots = new List<TMP_Text>();
     List<MouseOver> itemSlotMouseOvers = new List<MouseOver>();
@@ -129,6 +131,7 @@ public class DropdownMenu : MonoBehaviour
                     }
 
                     if (Input.GetMouseButtonDown(0)) {
+                        confirmSound.Play();
                         highlightableSegment.ReceiveDropdownInput(itemSlots[currentlyHighlighted].text.Remove(0, 16));
 
                         displaying = false;

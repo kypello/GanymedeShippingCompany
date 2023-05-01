@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccb20feed8dde0a5aa349971e1aa7890, type: 3}
   m_Name: VisaIDRule
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
-  errorText: 
+  appearsInRulebook: 1
+  rulebookEntry: ID number on visa must match package ID
+  errorText: Visa ID doesn't match
   destinationRegistry: {fileID: 0}
-  dependentRules: []

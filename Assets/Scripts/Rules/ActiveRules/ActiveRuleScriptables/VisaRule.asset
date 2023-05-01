@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c579f0f2b1f4cc602a7c7cdbe4462a59, type: 3}
   m_Name: VisaRule
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
-  errorText: 
-  destinationRegistry: {fileID: 0}
-  dependentRules:
-  - {fileID: 11400000, guid: cab90834d24951b1db67b26aee5c264a, type: 2}
-  - {fileID: 11400000, guid: 2a9320d89cfe2f928a5209a977cb79b7, type: 2}
+  appearsInRulebook: 1
+  rulebookEntry: All packages going outside the Jovian System must have an Interplanetary
+    Visa
+  errorText: Missing interplanetary visa
+  destinationRegistry: {fileID: 11400000, guid: a7afaf0ccf4e39c7fbdab62c4e848361, type: 2}

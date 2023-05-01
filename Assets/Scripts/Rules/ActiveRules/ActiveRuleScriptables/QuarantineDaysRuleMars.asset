@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f983c107a94128ca48587f2efd98817f, type: 3}
   m_Name: QuarantineDaysRuleMars
   m_EditorClassIdentifier: 
-  appearsInRulebook: 0
-  rulebookEntry: 
+  appearsInRulebook: 1
+  rulebookEntry: 'Ares BStation: 20 days, Phobos: 60 days, Deimos: 75 days, Mars:
+    120 days'
   errorText: Incorrect quarantine period
   destinationRegistry: {fileID: 0}
   locationQuarantinePeriods:

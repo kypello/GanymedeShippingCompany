@@ -11,7 +11,17 @@ public class Palette : MonoBehaviour
     public PaletteDocument[] paletteDocuments;
     public DragDocument dragDocument;
 
+    public AudioSource documentPickupSound;
+
     bool visible = true;
+
+    public void SetAvailableDocuments(int documents) {
+        for (int i = 0; i < paletteDocuments.Length; i++) {
+            if (i >= documents) {
+                paletteDocuments[i].gameObject.SetActive(false);
+            }
+        }
+    }
 
     void Update() {
         bool highlightingDocument = false;
@@ -30,6 +40,7 @@ public class Palette : MonoBehaviour
             highlight.anchoredPosition = documentBeingHighlighted.rectTransform.anchoredPosition;
 
             if (Input.GetMouseButtonDown(0)) {
+                documentPickupSound.Play();
                 dragDocument.SpawnNewDocument(documentBeingHighlighted.documentPrefab);
                 uiManager.EnterDraggingDocumentState();
             }
