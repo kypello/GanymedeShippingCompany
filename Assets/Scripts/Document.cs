@@ -33,7 +33,7 @@ public class Document : MonoBehaviour
     public HighlightableSegment[] highlightableSegments;
 
     public enum Type {
-        Free, Stamp, Address, Result, Visa
+        Free, Stamp, Address, Result, Visa, AsteroidPass, QuarantineMandate
     }
     public Type type;
 

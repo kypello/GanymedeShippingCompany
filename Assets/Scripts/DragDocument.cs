@@ -21,12 +21,10 @@ public class DragDocument : MonoBehaviour
     public Palette palette;
     public RectTransform noSymbol;
 
-    public DropdownMenu dropdownMenu;
-
     public Transform documentPlacePlane;
 
     public bool draggingDocument = false;
-    bool clickedThisFrame = false;
+    public bool clickedThisFrame = false;
 
     void Update() {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -37,7 +35,7 @@ public class DragDocument : MonoBehaviour
             
             Vector2Int highlightedTile = package.WorldToTileSpace(hit.point);
 
-            if (package.TileIsWithinBounds(highlightedTile) && package.TileIsOccupied(highlightedTile) && !dropdownMenu.IsActive()) {
+            if (package.TileIsWithinBounds(highlightedTile) && package.TileIsOccupied(highlightedTile) && !DropdownMenu.instance.IsActive() && !TextInputMonitor.instance.IsMonitoring()) {
                 Document highlightedDocument = package.GetDocumentAtTile(highlightedTile);
 
                 if (highlightedDocument.CheckHighlightableSegments() != null) {
@@ -54,7 +52,7 @@ public class DragDocument : MonoBehaviour
                     placePreview.transform.rotation = highlightedDocument.transform.rotation;
                     placePreviewCanvas.sizeDelta = new Vector2(highlightedDocument.width * 200, highlightedDocument.height * 200);
 
-                    if (Input.GetMouseButtonDown(0)) {
+                    if (Input.GetMouseButtonDown(0) && !clickedThisFrame) {
                         documentBeingDragged = highlightedDocument;
                         documentBeingDragged.transform.rotation = Quaternion.identity;
                         draggingDocument = true;
