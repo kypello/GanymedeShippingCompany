@@ -55,7 +55,15 @@ public class PackageManager : MonoBehaviour
 
     public Material conveyor;
 
+    public TMP_Text scoreDisplay;
+
     public static bool endless = false;
+    public static int correct;
+    public static int mistakes;
+
+    public ParticleSystem confettiA;
+    public ParticleSystem confettiB;
+    public ParticleSystem confettiC;
 
     void Start() {
         if (endless) {
@@ -65,11 +73,12 @@ public class PackageManager : MonoBehaviour
             currentDay = storyDays[DateAuthority.date - 1];
         }
         dateDisplay.text = DateAuthority.date + " May 2164 UST";
+        UpdateScoreDisplay();
 
         string rulebookText = "";
 
         if (!endless) {
-            rulebookText += "<b>" + currentDay.storyText + "</b>\n\n"; 
+            rulebookText += "<color=#AAAAFF50><b>" + currentDay.storyText + "</b></color>\n\n"; 
         }
 
         foreach (Rule rule in currentDay.passiveRules) {
@@ -89,6 +98,10 @@ public class PackageManager : MonoBehaviour
         rulebookPopup.InitialOpen();
         uiManager.EnterRulebookState();
         StartCoroutine(FadeIn());
+    }
+
+    void UpdateScoreDisplay() {
+        scoreDisplay.text = "Correct: " + correct + "\nMistakes: " + mistakes;
     }
 
     public void StartDay() {
@@ -150,7 +163,13 @@ public class PackageManager : MonoBehaviour
         addressDocument.SetData("system", destinationRegistry.systems[systemIndex].name);
         dummyStamp.SetData("system", destinationRegistry.systems[systemIndex].name);
         addressDocument.SetData("location", destinationRegistry.systems[systemIndex].locations[Random.Range(0, destinationRegistry.systems[systemIndex].locations.Length)]);
-        addressDocument.SetData("weight", "" + Random.Range(5, 40));
+
+        if (addressDocument.GetData("system") == "Uranian System") {
+            addressDocument.SetData("weight", "" + Random.Range(5, 15));
+        }
+        else {
+            addressDocument.SetData("weight", "" + Random.Range(5, 40));
+        }
         addressDocument.SetData("actual weight", addressDocument.GetData("weight"));
         addressDocument.SetData("id", "" + Random.Range(100000, 999999));
 
@@ -285,6 +304,8 @@ public class PackageManager : MonoBehaviour
 
         if (error) {
             incorrectSound.Play();
+            mistakes++;
+            UpdateScoreDisplay();
             camShake.Play();
             errorContinueButton.gameObject.SetActive(true);
             errorContinueButton.mouseOver = false;
@@ -302,6 +323,11 @@ public class PackageManager : MonoBehaviour
         }
         else {
             correctSound.Play();
+            correct++;
+            confettiA.Play();
+            confettiB.Play();
+            confettiC.Play();
+            UpdateScoreDisplay();
         }
 
         packagesSent++;

@@ -28,6 +28,8 @@ public class TitleScreen : MonoBehaviour
                 if (Input.GetMouseButtonDown(0) && !loading) {
                     DateAuthority.date = 1;
                     PackageManager.endless = false;
+                    PackageManager.correct = 0;
+                    PackageManager.mistakes = 0;
                     buttonSound.Play();
                     StartCoroutine(Load());
                 }
@@ -36,6 +38,8 @@ public class TitleScreen : MonoBehaviour
                 if (Input.GetMouseButtonDown(0) && !loading) {
                     DateAuthority.date = 1;
                     PackageManager.endless = true;
+                    PackageManager.correct = 0;
+                    PackageManager.mistakes = 0;
                     buttonSound.Play();
                     StartCoroutine(Load());
                 }

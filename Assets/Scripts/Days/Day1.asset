@@ -21,10 +21,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d95011d3e094f04149b4d3f691e0c7c7, type: 2}
   activeRules: []
   availableDocuments: 2
-  storyText: HOWDY!!! Welcome to your first day at Ganymede Shipping Company! Your
+  storyText: 'HOWDY!!! Welcome to your first day at Ganymede Shipping Company! Your
     job is to inspect outgoing packages, and either approve or deny them by giving
-    them a green or red sticker. Currently we only ship within the Jovian system,
-    so deny any packages that go to other systems. Good luck!
+    them a green or red sticker.
+
+
+    Those hacks over at Semi Automated Shipping
+    Company are doing everything with their silly little robots now. We''re gonna
+    show them how it''s done with some good old-fashioned manual labour!!!
+
+
+    Currently
+    we only ship within the Jovian system, so deny any packages that go to other
+    systems. Good luck!'
   testRule: {fileID: 11400000, guid: d95011d3e094f04149b4d3f691e0c7c7, type: 2}
   testRulePackageNum: 1
   doRuleTest: 1

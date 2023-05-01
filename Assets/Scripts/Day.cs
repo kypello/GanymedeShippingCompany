@@ -13,6 +13,7 @@ public class Day : ScriptableObject
 
     public int availableDocuments;
 
+    [TextAreaAttribute]
     public string storyText;
 
     public Rule testRule;
