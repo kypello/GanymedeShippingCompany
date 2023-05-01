@@ -51,7 +51,7 @@ Shader "Custom/StarShader"
                 // apply fog
                 //UNITY_APPLY_FOG(i.fogCoord, col);
 
-                if (col.r > 0.4) {
+                if (col.r > 0.65) {
                     return col;
                     //return float4(1, 1, 1, 1);
                 }
