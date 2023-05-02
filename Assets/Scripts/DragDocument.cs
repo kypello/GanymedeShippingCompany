@@ -31,6 +31,8 @@ public class DragDocument : MonoBehaviour
     public AudioSource documentPlaceSound;
     public AudioSource documentDeleteSound;
 
+    public Canvas canvas;
+
     void Update() {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -114,7 +116,7 @@ public class DragDocument : MonoBehaviour
 
                 if (!documentBeingDragged.deleteAllowed) {
                     noSymbol.gameObject.SetActive(true);
-                    noSymbol.anchoredPosition = new Vector2(Input.mousePosition.x / Screen.width * 2560f - 80f - 160f * (documentBeingDragged.width - 1), Input.mousePosition.y / Screen.height * 1440f - 80f - 160f * (documentBeingDragged.height - 1));
+                    noSymbol.anchoredPosition = new Vector2(Input.mousePosition.x / canvas.scaleFactor - 80f - 160f * (documentBeingDragged.width - 1), Input.mousePosition.y / canvas.scaleFactor - 80f - 160f * (documentBeingDragged.height - 1));
                 }
 
                 if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && !clickedThisFrame && documentBeingDragged.deleteAllowed) {

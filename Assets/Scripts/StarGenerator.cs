@@ -18,6 +18,7 @@ public class StarGenerator : MonoBehaviour
     }
     */
 
+    /*
     void Start() {
         Color[] pixels = new Color[1000000];
         for (int y = 0; y < 1000; y++) {
@@ -34,4 +35,5 @@ public class StarGenerator : MonoBehaviour
         byte[] bytes = texture.EncodeToPNG();
         System.IO.File.WriteAllBytes(Application.dataPath + "/stars.png", bytes);
     }
+    */
 }

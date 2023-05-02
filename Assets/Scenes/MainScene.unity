@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18503025, g: 0.23531505, b: 0.3962264, a: 1}
+  m_Color: {r: 0.13333334, g: 0.19607843, b: 0.34901962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3688,6 +3688,7 @@ MonoBehaviour:
   documentPickupSound: {fileID: 1053878133}
   documentPlaceSound: {fileID: 615985454}
   documentDeleteSound: {fileID: 1139746129}
+  canvas: {fileID: 1029084217}
 --- !u!4 &381702189
 Transform:
   m_ObjectHideFlags: 0
@@ -15544,7 +15545,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 2560, y: 1440}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -39099,6 +39100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f6e589262c73b32be73d249d94d986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasRectTransform: {fileID: 1029084218}
+  canvas: {fileID: 1029084217}
   confirmSound: {fileID: 1052627071}
   itemSlots:
   - {fileID: 1920067764}

@@ -7,7 +7,7 @@ public class DropdownHighlightableSegment : HighlightableSegment
     public string[] items;
 
     public override void GetClicked() {
-        DropdownMenu.instance.Display(items, new Vector2(Input.mousePosition.x / Screen.width * 2560f, Input.mousePosition.y / Screen.height * 1440f), this);
+        DropdownMenu.instance.Display(items, Input.mousePosition, this);
     }
 
     public void ReceiveDropdownInput(string dropdownInput) {

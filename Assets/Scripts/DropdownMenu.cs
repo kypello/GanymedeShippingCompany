@@ -10,12 +10,15 @@ public class DropdownMenu : MonoBehaviour
 
     const float lineHeight = 60f;
     const float characterWidth = 29f;
-    const float canvasWidth = 2560f;
-    const float canvasHeight = 1440f;
+    public RectTransform canvasRectTransform;
+    public Canvas canvas;
 
     const float rightBound = 2200f;
     const float leftBound = 360f;
     const float bottomBound = 24f;
+    //const float leftBound = 0f;
+    //const float rightBound = 5000f;
+    //const float bottomBound = -5000f;
 
     RectTransform rectTransform;
 
@@ -58,6 +61,9 @@ public class DropdownMenu : MonoBehaviour
     public void Display(string[] items, Vector2 position, DropdownHighlightableSegment client) {
         highlightableSegment = client;
 
+        //position = new Vector2(position.x / Screen.width * canvasRectTransform.sizeDelta.x, position.y / Screen.height * canvasRectTransform.sizeDelta.x);
+        position /= canvas.scaleFactor;
+
         gameObject.SetActive(true);
         int longestLineLength = 0;
 
@@ -91,13 +97,13 @@ public class DropdownMenu : MonoBehaviour
         rectTransform.sizeDelta = new Vector2(longestLineLength * characterWidth + 74f, 70f);
         panel.sizeDelta = new Vector2(longestLineLength * characterWidth + 50f, lineHeight * items.Length + 24f);
 
-        if (position.x - rectTransform.sizeDelta.x / 2f < leftBound) {
-            position.x = leftBound + rectTransform.sizeDelta.x / 2f;
+        if (position.x - rectTransform.sizeDelta.x / 2f < leftBound / canvas.scaleFactor) {
+            position.x = leftBound / canvas.scaleFactor + rectTransform.sizeDelta.x / 2f;
         }
-        if (position.x + rectTransform.sizeDelta.x / 2f > rightBound) {
-            position.x = rightBound - rectTransform.sizeDelta.x / 2f;
+        if (position.x + rectTransform.sizeDelta.x / 2f > rightBound / canvas.scaleFactor) {
+            position.x = rightBound / canvas.scaleFactor - rectTransform.sizeDelta.x / 2f;
         }
-        if (position.y - rectTransform.sizeDelta.y / 2f - panel.sizeDelta.y < bottomBound) {
+        if (position.y - rectTransform.sizeDelta.y / 2f - panel.sizeDelta.y < bottomBound / canvas.scaleFactor) {
             panel.pivot = new Vector2(0, 0);
             panel.anchoredPosition = new Vector2(12f, 70f);
         }
@@ -113,6 +119,8 @@ public class DropdownMenu : MonoBehaviour
     }
 
     void Update() {
+        Debug.Log(canvas.scaleFactor);
+
         if (displaying) {
             if (!mouseOver.mouseOver) {
                 displaying = false;

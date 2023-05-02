@@ -57,7 +57,7 @@ public class PackageManager : MonoBehaviour
 
     public TMP_Text scoreDisplay;
 
-    public static bool endless = false;
+    public static bool endless = true;
     public static int correct;
     public static int mistakes;
 
