@@ -3078,6 +3078,8 @@ MonoBehaviour:
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
   text: {fileID: 1133998041}
+  hasSprite: 0
+  sprite: {fileID: 0}
 --- !u!1 &1151483476
 GameObject:
   m_ObjectHideFlags: 0
@@ -4204,7 +4206,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Build
 
-    1.2'
+    1.2.1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6581,6 +6583,8 @@ MonoBehaviour:
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 1, g: 1, b: 0, a: 1}
   text: {fileID: 2022220540}
+  hasSprite: 0
+  sprite: {fileID: 0}
 --- !u!1 &2024095264
 GameObject:
   m_ObjectHideFlags: 0
