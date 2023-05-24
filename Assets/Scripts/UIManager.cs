@@ -35,9 +35,9 @@ public class UIManager : MonoBehaviour
         shipButtonText.text = "Next";
 
         rulebookButton.gameObject.SetActive(true);
-        rulebookButtonText.text = "View Rulebook";
+        rulebookButtonText.text = " Rulebook";
         planetButton.gameObject.SetActive(true);
-        planetButtonText.text = "Planet List";
+        planetButtonText.text = " Planet List";
         state = State.SelectDocument;
 
         if (!packageManager.dayStarted) {
@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
         shipButton.clickable = false;
         planetButton.gameObject.SetActive(false);
         rulebookButton.gameObject.SetActive(true);
-        rulebookButtonText.text = "Close";
+        rulebookButtonText.text = " Close";
         state = State.Rulebook;
     }
 
@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
         shipButton.clickable = false;
         rulebookButton.gameObject.SetActive(false);
         planetButton.gameObject.SetActive(true);
-        planetButtonText.text = "Close";
+        planetButtonText.text = " Close";
         state = State.PlanetList;
     }
 }

@@ -17,3 +17,4 @@ MonoBehaviour:
     (check planets list)
   errorText: Missing stamp
   destinationRegistry: {fileID: 0}
+  dayIntroduced: 1

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AddressDocumentRule
   m_EditorClassIdentifier: 
   appearsInRulebook: 1
-  rulebookEntry: All packages must have a destination sticker
-  errorText: Missing destination sticker
+  rulebookEntry: All packages must have a Destination Sticker
+  errorText: Missing Destination Sticker
   destinationRegistry: {fileID: 0}
+  dayIntroduced: 1

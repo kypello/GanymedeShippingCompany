@@ -17,3 +17,4 @@ MonoBehaviour:
     Sticker
   errorText: Visa destination system doesn't match
   destinationRegistry: {fileID: 0}
+  dayIntroduced: 2

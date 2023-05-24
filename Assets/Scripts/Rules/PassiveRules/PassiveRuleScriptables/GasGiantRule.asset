@@ -15,5 +15,6 @@ MonoBehaviour:
   appearsInRulebook: 1
   rulebookEntry: Ship to the Gas Giants and Kuiper Belt only. No shipping through
     the Asteroid Belt or to the inner planets
-  errorText: 
+  errorText: No shipping through the Asteroid Belt
   destinationRegistry: {fileID: 11400000, guid: a7afaf0ccf4e39c7fbdab62c4e848361, type: 2}
+  dayIntroduced: 2

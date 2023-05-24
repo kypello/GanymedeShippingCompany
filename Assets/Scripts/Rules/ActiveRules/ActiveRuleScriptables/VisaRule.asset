@@ -15,5 +15,6 @@ MonoBehaviour:
   appearsInRulebook: 1
   rulebookEntry: All packages going outside the Jovian System must have an Interplanetary
     Visa
-  errorText: Missing interplanetary visa
+  errorText: Missing Interplanetary Visa
   destinationRegistry: {fileID: 11400000, guid: a7afaf0ccf4e39c7fbdab62c4e848361, type: 2}
+  dayIntroduced: 2

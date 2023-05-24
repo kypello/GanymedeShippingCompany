@@ -17,3 +17,4 @@ MonoBehaviour:
     going to the inner planets) must have an Asteroid Pass
   errorText: Missing Asteroid Pass
   destinationRegistry: {fileID: 11400000, guid: a7afaf0ccf4e39c7fbdab62c4e848361, type: 2}
+  dayIntroduced: 3

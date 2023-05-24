@@ -17,6 +17,7 @@ MonoBehaviour:
     120 days'
   errorText: Incorrect quarantine period
   destinationRegistry: {fileID: 0}
+  dayIntroduced: 4
   locationQuarantinePeriods:
   - location: Mars
     days: 120

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: WeightMatchRule
   m_EditorClassIdentifier: 
   appearsInRulebook: 1
-  rulebookEntry: Weight listed on package must match actual weight (show on left
+  rulebookEntry: Weight listed on package must match actual weight (shown on left
     side of the screen)
   errorText: Package weight doesn't match
   destinationRegistry: {fileID: 0}
+  dayIntroduced: 1

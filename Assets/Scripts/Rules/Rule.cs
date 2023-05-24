@@ -8,6 +8,7 @@ public abstract class Rule : ScriptableObject
     public string rulebookEntry;
     public string errorText;
     public DestinationRegistry destinationRegistry;
+    public int dayIntroduced;
 
     public abstract bool Verify(Package package);
 

@@ -17,3 +17,4 @@ MonoBehaviour:
     Asteroid Pass must be three days ahead
   errorText: Incorrect date of arrival in Asteroid Belt
   destinationRegistry: {fileID: 0}
+  dayIntroduced: 3

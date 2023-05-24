@@ -16,3 +16,4 @@ MonoBehaviour:
   rulebookEntry: ID number on visa must match package ID
   errorText: Visa ID doesn't match
   destinationRegistry: {fileID: 0}
+  dayIntroduced: 2

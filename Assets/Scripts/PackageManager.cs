@@ -83,12 +83,22 @@ public class PackageManager : MonoBehaviour
 
         foreach (Rule rule in currentDay.passiveRules) {
             if (rule.appearsInRulebook) {
-                rulebookText += "- " + rule.rulebookEntry + "\n\n";
+                string nextRuleText = "- " + rule.rulebookEntry + "\n\n";
+                if (!endless && rule.dayIntroduced == DateAuthority.date) {
+                    nextRuleText = nextRuleText.Insert(0, "<color=#FFFF00><b>[NEW]</b> ");
+                    nextRuleText += "</color>";
+                }
+                rulebookText += nextRuleText;
             }
         }
         foreach (Rule rule in currentDay.activeRules) {
             if (rule.appearsInRulebook) {
-                rulebookText += "- " + rule.rulebookEntry + "\n\n";
+                string nextRuleText = "- " + rule.rulebookEntry + "\n\n";
+                if (!endless && rule.dayIntroduced == DateAuthority.date) {
+                    nextRuleText = nextRuleText.Insert(0, "<color=#FFFF00><b>[NEW]</b> ");
+                    nextRuleText += "</color>";
+                }
+                rulebookText += nextRuleText;
             }
         }
         rulebook.text = rulebookText;
@@ -241,7 +251,7 @@ public class PackageManager : MonoBehaviour
 
     public IEnumerator FadeIn() {
         fadeAnim.gameObject.SetActive(true);
-        dayText.text = "Day " + DateAuthority.date;
+        dayText.text = "-Day " + DateAuthority.date + "-";
         dayTextAnim.Play();
         yield return new WaitForSeconds(2f);
         fadeAnim.Play("FadeIn");
